@@ -7,9 +7,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  usuario: string;
+  password: string;
+  mensaje: string;
+  formIncorrecto: boolean;
+
+  constructor() {
+    this.usuario = '';
+    this.password = '';
+    this.mensaje = '';
+    this.formIncorrecto = false;
+
+  }
 
   ngOnInit(): void {
   }
 
+  enviado() {
+    if(this.usuario == '' || this.password == '') {
+      this.formIncorrecto = true;
+      this.mensaje = 'Usuario o password incorrecto';
+      return;
+    }else {
+      this.usuario === 'challenge@alkemy.com' && this.password === 'react';
+      this.mensaje = 'Bienvenido';
+      this.formIncorrecto = false;
+    }
+    console.log(this.usuario)
+    console.log(this.password)
+
+  }
 }
