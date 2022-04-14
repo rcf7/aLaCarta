@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/servicios/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +13,14 @@ export class LoginComponent implements OnInit {
 
   usuario: any;
   password: any;
-  mensaje: string;
+
   formIncorrecto: boolean;
   token: any
 
   constructor(private loginService: LoginService) {
     this.usuario = '';
     this.password = '';
-    this.mensaje = '';
+
     this.formIncorrecto = false;
 
   }
@@ -39,16 +40,23 @@ export class LoginComponent implements OnInit {
         res=>{
           this.token = res
           localStorage.setItem('token', this.token.token)
-          console.log()
+          this.mensaje('success','Bienvenido','Que lo disfrute')
         },
         err=>{
           //console.log(err)
         }
       )
 
-
+    }
     }
 
+    mensaje(icono: any, titulo: string, texto:string){
+      Swal.fire({
+        icon: icono,
+        title: titulo,
+        text: texto,
+      })
+    }
 
 }
-}
+
