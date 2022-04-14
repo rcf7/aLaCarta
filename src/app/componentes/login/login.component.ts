@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+
 export class LoginComponent implements OnInit {
 
-  usuario: string;
-  password: string;
+  usuario: any;
+  password: any;
   mensaje: string;
   formIncorrecto: boolean;
+  token: any
 
-  constructor() {
+  constructor(private loginService: LoginService) {
     this.usuario = '';
     this.password = '';
     this.mensaje = '';
@@ -23,18 +27,28 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  enviado() {
+  enviar() {
     if(this.usuario == '' || this.password == '') {
-      this.formIncorrecto = true;
-      this.mensaje = 'Usuario o password incorrecto';
-      return;
+     console.log('faltan datos')
     }else {
-      this.usuario === 'challenge@alkemy.com' && this.password === 'react';
-      this.mensaje = 'Bienvenido';
-      this.formIncorrecto = false;
-    }
-    console.log(this.usuario)
-    console.log(this.password)
+      const user = {
+        email: this.usuario,
+        password: this.password
+      }
+      this.loginService.postLogin(user).subscribe(
+        res=>{
+          this.token = res
+          localStorage.setItem('token', this.token.token)
+          console.log()
+        },
+        err=>{
+          //console.log(err)
+        }
+      )
 
-  }
+
+    }
+
+
+}
 }
