@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { Component, OnInit} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from 'src/app/servicios/login.service';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -11,30 +14,39 @@ import Swal from 'sweetalert2';
 
 export class LoginComponent implements OnInit {
 
-  usuario: any;
-  password: any;
-
+  username: any;
+  userpassword: any;
   formIncorrecto: boolean;
-  token: any
+  token: any;
+  //miFormulario : any;
+  //mensaje: any;
 
   constructor(private loginService: LoginService) {
-    this.usuario = '';
-    this.password = '';
 
+    this.username = '';
+    this.userpassword = '';
     this.formIncorrecto = false;
+    //this.mensaje = "";
+
+
 
   }
+  miFormulario = new FormGroup({
+    usernameForm : new FormControl('', Validators.required),
+    userpasswordForm : new FormControl('', Validators.required),
+
+  });
 
   ngOnInit(): void {
   }
 
   enviar() {
-    if(this.usuario == '' || this.password == '') {
+    if(this.username == '' || this.userpassword == '') {
      console.log('faltan datos')
     }else {
       const user = {
-        email: this.usuario,
-        password: this.password
+        email: this.username,
+        password: this.userpassword
       }
       this.loginService.postLogin(user).subscribe(
         res=>{
@@ -43,20 +55,24 @@ export class LoginComponent implements OnInit {
           this.mensaje('success','Bienvenido','Que lo disfrute')
         },
         err=>{
-          //console.log(err)
+          console.log(err)
         }
       )
 
     }
     }
 
-    mensaje(icono: any, titulo: string, texto:string){
+    mensaje(icono: any, titulo: string, texto: string){
       Swal.fire({
-        icon: icono,
-        title: titulo,
-        text: texto,
+      icon: icono,
+      title: titulo,
+      text: texto,
       })
+
     }
 
 }
 
+
+//}
+//}

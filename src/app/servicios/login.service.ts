@@ -7,8 +7,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  postLogin(usuario: any) {
-    return this.http.post("http://challenge-react.alkemy.org/", usuario)
+  postLogin(username: any) {
+    return this.http.post("http://challenge-react.alkemy.org/", username)
   }
 
 
