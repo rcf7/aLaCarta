@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="container">
+  <form [formGroup]="miFormulario">
+    <div class="col-lg-4">
+      <h1 class="text-center">A la Carta</h1>
+      Usuario :
+      <input
+      [class.is-invalid] = "miFormulario.get('usernameForm')?.touched && miFormulario.get('usernameForm')?.invalid"
+      type="text"
+      class="form-control"
+      formControlName="usernameForm"
+      [(ngModel)]="username">
+      Password :
+      <input
+      [class.is-invalid] = "miFormulario.get('userpasswordForm')?.touched && miFormulario.get('userpasswordForm')?.invalid"
+      type="password"
+      class="form-control"
+      formControlName="userpasswordForm"
+      [(ngModel)]="userpassword"
+      ><br/>
+        <button class="btn btn-primary" type="submit" (click)="enviar()">Enviar</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
