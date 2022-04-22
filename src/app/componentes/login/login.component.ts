@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   username: any;
+
   userpassword: any;
   formIncorrecto: boolean;
   token: any;
