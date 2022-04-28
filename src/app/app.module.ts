@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { HomeComponent } from './componentes/home/home.component';
-import { PlatosComponent } from './componentes/home/platos/platos.component';
+
 
 
 @NgModule({
@@ -15,7 +15,6 @@ import { PlatosComponent } from './componentes/home/platos/platos.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    PlatosComponent
   ],
   imports: [
     BrowserModule,
